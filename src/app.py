@@ -38,6 +38,45 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    # Sports
+    "Basketball": {
+        "description": "Team sport focused on skill, teamwork, and fitness",
+        "schedule": "Tuesdays, 4:00 PM - 5:30 PM",
+        "max_participants": 15,
+        "participants": []
+    },
+    "Swimming": {
+        "description": "Swimming lessons and competitions for all levels",
+        "schedule": "Thursdays, 3:00 PM - 4:30 PM",
+        "max_participants": 20,
+        "participants": []
+    },
+    # Artistic
+    "Sculpture Workshop": {
+        "description": "Explore 3D art using clay, wood, and other materials",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 10,
+        "participants": []
+    },
+    "Photography Club": {
+        "description": "Learn photography techniques and participate in photo walks",
+        "schedule": "Mondays, 4:00 PM - 5:00 PM",
+        "max_participants": 12,
+        "participants": []
+    },
+    # Intellectual
+    "Math Olympiad": {
+        "description": "Prepare for math competitions and enhance problem-solving skills",
+        "schedule": "Fridays, 2:00 PM - 3:30 PM",
+        "max_participants": 16,
+        "participants": []
+    },
+    "Debate Team": {
+        "description": "Develop public speaking and critical thinking through debates",
+        "schedule": "Wednesdays, 4:00 PM - 5:30 PM",
+        "max_participants": 14,
+        "participants": []
     }
 }
 
@@ -62,6 +101,11 @@ def signup_for_activity(activity_name: str, email: str):
     # Get the specific activity
     activity = activities[activity_name]
 
+
+# Validate student is not already signed up    if email in activity["participants"]:
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
+    
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
